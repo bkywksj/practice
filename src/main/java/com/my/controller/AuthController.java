@@ -11,8 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,7 +41,8 @@ public class AuthController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) {
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
 
         AccessToken accessToken = new AccessToken();
         accessToken.setCode(code);
@@ -55,15 +57,18 @@ public class AuthController {
 
         if (githubUser != null) {
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String uuid = UUID.randomUUID().toString();
+            user.setToken(uuid);
             user.setName(githubUser.getName());
             user.setAccount_id(String.valueOf(githubUser.getId()));
             user.setGmtCreat(new Date());
             user.setGmtModified(new Date());
             userMapper.insert(user);
+            response.addCookie(new Cookie("token", uuid));
+
 
             request.getSession().setAttribute("user", githubUser);
-            //登录成功
+            //登录成功后,创建的uuid相当于session,存入数据库,下次直接调用就不用再次登录
         }
         return "redirect:/";
 

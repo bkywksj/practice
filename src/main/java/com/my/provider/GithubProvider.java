@@ -7,6 +7,10 @@ import okhttp3.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.HashMap;
+
+import static com.my.utils.HttpClientUtil.doGet;
+import static com.my.utils.HttpClientUtil.objectToMap;
 
 /*
  *
@@ -16,40 +20,36 @@ import java.io.IOException;
 @Component
 public class GithubProvider {
     public String getAccessToken(AccessToken accessToken) {
-        MediaType mediaType = MediaType.get("application/json; charset=utf-8");
-        OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessToken));
-        Request request = new Request.Builder()
-                .url("https://github.com/login/oauth/access_token")
-                .post(body)
-                .build();
-        try (Response response = client.newCall(request).execute()) {
-            String string = response.body().string();
-            System.out.println(string);//access_token=bbe067a10c4a019ec1f1e8a1de082541e81dca2f&scope=user&token_type=bearer
-            String[] split = string.split("&");
-            String token = split[0].split("=")[1];
-            System.out.println(token);
-
-            return token;
-        } catch (IOException e) {
-            e.printStackTrace();
+        String url = "https://github.com/login/oauth/access_token";
+        HashMap<String, String> map = new HashMap<>();
+        map = (HashMap<String, String>) objectToMap(accessToken);
+//        map.put("client_id", accessToken.getClient_id());
+//        map.put("client_secret", accessToken.getClient_secret());
+//        map.put("code", accessToken.getCode());
+//        map.put("redirect_url", accessToken.getRedirect_url());
+//        map.put("state", accessToken.getState());
+        String result = doGet(url, map);
+        System.out.println(result);
+        if (result != null) {
+            result = result.split("&")[0].split("=")[1];
+            System.out.println("result"+result);
+            return result;
+        } else {
+            return null;
         }
-        return null;
+
     }
 
-    public GithubUser getUser(String token) {
-        OkHttpClient client = new OkHttpClient();
-            Request request = new Request.Builder()
-                    .url("https://api.github.com/user?access_token="+token)
-                    .build();
-        try (Response response = client.newCall(request).execute()) {
-           String str=response.body().string();
-            System.out.println(str);
-            GithubUser githubUser = JSON.parseObject(str, GithubUser.class);
-            return githubUser;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+public GithubUser getUser(String token) {
+    String url = "https://api.github.com/user?access_token=" + token;
+    String result = doGet(url);
+    if (result != null) {
+        return JSON.parseObject(result, GithubUser.class);
+    } else {
         return null;
     }
+}
+
+
 }
