@@ -4,6 +4,7 @@ import com.my.dto.AccessToken;
 import com.my.dto.GithubUser;
 import com.my.entity.User;
 import com.my.mapper.UserMapper;
+
 import com.my.provider.GithubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,7 +43,7 @@ public class AuthController {
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
                            HttpServletRequest request,
-                           HttpServletResponse response) {
+                           HttpServletResponse response) throws Exception {
 
         AccessToken accessToken = new AccessToken();
         accessToken.setCode(code);
@@ -60,6 +61,8 @@ public class AuthController {
             String uuid = UUID.randomUUID().toString();
             user.setToken(uuid);
             user.setName(githubUser.getName());
+            user.setBio(githubUser.getBio());
+            user.setAvatarUrl(githubUser.getAvatarUrl());
             user.setAccount_id(String.valueOf(githubUser.getId()));
             user.setGmtCreat(new Date());
             user.setGmtModified(new Date());

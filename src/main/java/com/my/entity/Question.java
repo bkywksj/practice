@@ -8,19 +8,22 @@ import java.util.Date;
 /*
  *
  *@author Ye
- *@create 2020/5/29 18:17
+ *@create 2020/5/30 11:10
  */
 @Data
-public class User {
+public class Question {
     private Integer id;
-    private String name;
-    private String account_id;
-    private String bio;
-    private String token;
+    private String title;
+    private String description;
+    private String tag;
     @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
     private Date gmtCreat;
     @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
     private Date gmtModified;
-    private String avatarUrl;
+    private Integer creator;
+    private Integer viewCount;
+    private Integer commentCount;
+    private Integer likeCount;
+    private Integer unlikeCount;
 
 }
