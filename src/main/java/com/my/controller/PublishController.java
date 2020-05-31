@@ -68,35 +68,32 @@ public class PublishController {
                     user = userMapper.findByToken(token);
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
+                        System.out.println("xxxxxxxxxxxx"+user);
+
+                        Question question = new Question();
+                        question.setTitle(title);
+                        question.setDescription(description);
+                        question.setTag(tag);
+                        question.setCreator(user.getAccountId());
+                        question.setGmtCreat(new Date());
+                        question.setGmtModified(new Date());
+                        System.out.println(question);
+                        if (questionMapper.creat(question)) {
+                            model.addAttribute("success", "恭喜你发布成功!你真是天才!");
+                        }
+
                     }
                     break;
                 }
             }
             if (user == null) {
                 model.addAttribute("error", "你妹啊,你还没登录,转去右上角登录吧,不然揍你");
-                return "publish";
+
             }
         }
 
-
-            Question question = new Question();
-            question.setTitle(title);
-            question.setDescription(description);
-            question.setTag(tag);
-            question.setCreator(user.getId());
-            question.setGmtCreat(new Date());
-            question.setGmtModified(new Date());
-            System.out.println(question);
-        if (questionMapper.creat(question)) {
-            model.addAttribute("success", "恭喜你发布成功!你真是天才!");
-            return "/publish";
-
-        } else {
-            return "/publish";
-        }
-
+        return "publish";
 
         }
-
 
 }

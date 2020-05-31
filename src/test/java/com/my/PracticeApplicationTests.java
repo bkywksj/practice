@@ -19,7 +19,7 @@ class PracticeApplicationTests {
 
         AccessToken accessToken = new AccessToken();
         accessToken.setState("1");
-        accessToken.setRedirect_url("http://localhost:80/callback");
+        accessToken.setRedirect_uri("http://localhost:80/callback");
         accessToken.setClient_secret("636e21f1ec61ae48bf5d4ac954787874eaa29335");
         accessToken.setCode("88920d8419e6fb9e72af");
         accessToken.setClient_id("f26076fd69065020e891");

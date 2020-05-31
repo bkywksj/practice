@@ -33,7 +33,7 @@ public class AuthController {
     @Value("${github.client_secret}")
     private String client_secret;
     @Value("${github.redirect_url}")
-    private String redirect_url;
+    private String redirect_uri;
 
     @Autowired
     private UserMapper userMapper;
@@ -49,8 +49,9 @@ public class AuthController {
         accessToken.setCode(code);
         accessToken.setClient_id(client_id);
         accessToken.setClient_secret(client_secret);
-        accessToken.setRedirect_url(redirect_url);//注意这里有端口
+        accessToken.setRedirect_uri(redirect_uri);//注意这里有端口
         accessToken.setState(state);
+        System.out.println(accessToken);
 
         String token = githubProvider.getAccessToken(accessToken);
         GithubUser githubUser = githubProvider.getUser(token);
@@ -63,7 +64,7 @@ public class AuthController {
             user.setName(githubUser.getName());
             user.setBio(githubUser.getBio());
             user.setAvatarUrl(githubUser.getAvatarUrl());
-            user.setAccount_id(String.valueOf(githubUser.getId()));
+            user.setAccountId(githubUser.getId());
             user.setGmtCreat(new Date());
             user.setGmtModified(new Date());
             userMapper.insert(user);

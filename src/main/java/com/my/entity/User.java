@@ -14,7 +14,7 @@ import java.util.Date;
 public class User {
     private Integer id;
     private String name;
-    private String account_id;
+    private String accountId;
     private String bio;
     private String token;
     @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")

@@ -4,8 +4,42 @@
     <meta charset="UTF-8">
     <title>问码子</title>
 </head>
-<body>
+<body >
 <div th:include="common/include.html :: search "></div>
+
+<div class="container-fluid" style="margin:10vw">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-education" aria-hidden="true"></span> 发现 ࿐ཉི༗࿆（ '▿ ' ） ༗࿆ཉི࿐</h2>
+            <hr>
+
+            <div class="media" th:each="question : ${questionList}">
+                <div class="media-left">
+                    <a href="#">
+                        <img style="width: 4vw;height: 4vw" class="media-object img-rounded" th:src="${question.user.avatarUrl}" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                    <span th:text="${question.description}"></span><br>●
+                    <span th:text="${question.commentCount}"></span><span style="color: #aaaaaa">个回复 </span>●
+                    <span th:text="${question.viewCount}"></span><span style="color: #aaaaaa">次浏览 </span>●
+                    <span style="color: #aaaaaa" th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd')}"></span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>热门话题</h3><br>
+            <p><li style="font-size: medium">问题标题:</p><p style="text-indent:2em;">请用精简的语言描述您发布的问题,</p><p style="text-indent:2em;">不超过25字</p></li>
+            <p><li style="font-size: medium">问题补充:</p><p style="text-indent:2em;">详细补充您的问题内容,</p><p style="text-indent:2em;">确保问题描述清晰直观,</p><p style="text-indent:2em;">并提供一些相关资料</p></li>
+            <p><li style="font-size: medium">选择标签:</p><p style="text-indent:2em;">选择一个或者多个合适的标签,</p><p style="text-indent:2em;">用逗号隔开,</p><p style="text-indent:2em;">每个标签不超过10个字</p></li>
+
+        </div>
+
+    </div>
+</div>
 
 
 <div th:include="common/include.html :: include "></div>
