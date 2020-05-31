@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>发布-问码子</title>
 </head>
-<body>
-<div th:include="common/include.html :: search "></div>
+<body style="background-color: #eeeeee">
+<div th:replace="~{common/include.html :: navgation} "></div>
 
-<div class="container-fluid" style="margin:5vw">
+<div class="container-fluid" style="background-color:#eeeeee;margin-left:10vw;margin-right:10vw;margin-top:3vw">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
            <h2><span class="glyphicon glyphicon-send" aria-hidden="true"></span> 发起</h2>
@@ -46,7 +46,7 @@
 </div>
 
 
-<div th:include="common/include.html :: include "></div>
+<div th:replace="~{common/include.html :: include} "></div>
 
 
 </body>

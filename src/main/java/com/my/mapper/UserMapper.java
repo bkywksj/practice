@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  *@create 2020/5/29 18:15
  */
 @Repository
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper {
 
     @Insert("insert into user(name,account_id,bio,token,gmt_creat,gmt_modified,avatar_url) values (#{name},#{accountId},#{bio},#{token},#{gmtCreat},#{gmtModified},#{avatarUrl})")
     int insert(User user);

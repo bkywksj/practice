@@ -83,6 +83,12 @@
             <artifactId>hutool-all</artifactId>
             <version>5.3.4</version>
         </dependency>
+<!--        page-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.1.8</version>
+        </dependency>
     </dependencies>
 
     <build>

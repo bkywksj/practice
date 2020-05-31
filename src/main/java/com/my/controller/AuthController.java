@@ -55,7 +55,7 @@ public class AuthController {
 
         String token = githubProvider.getAccessToken(accessToken);
         GithubUser githubUser = githubProvider.getUser(token);
-        System.out.println(githubUser);
+        System.out.println("githubUser:"+githubUser);
 
         if (githubUser != null) {
             User user = new User();
