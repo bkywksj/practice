@@ -21,12 +21,18 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
-                    <span th:text="${question.description}"></span><br>●
-                    <span th:text="${question.commentCount}"></span><span style="color: #aaaaaa">个回复 </span>●
-                    <span th:text="${question.viewCount}"></span><span style="color: #aaaaaa">次浏览 </span>●
-                    <span style="color: #aaaaaa"
-                          th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd HH:mm:ss')}"></span>
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a>
+                    </h4>
+                    <span class="text-muted">
+                           <span th:text="${question.description}"></span>
+                            <br> ●
+                            <span th:text="${question.commentCount}"></span>
+                            个回复 ●
+                            <span th:text="${question.viewCount}"></span>次浏览 ●
+                            <span th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd HH:mm:ss')}"></span>
+                    </span>
+
                 </div>
             </div>
 
@@ -44,7 +50,7 @@
                         </a>
                     </li>
 
-                    <li th:each="page:${pageDTO.pages}" th:class="${pageDTO.page==page}?'active':''">
+                    <li th:each="page : ${pageDTO.pages}" th:class="${pageDTO.page==page}?'active':''">
                         <a th:href="@{/(page=${page})}" th:text="${page}"></a>
                     </li>
 

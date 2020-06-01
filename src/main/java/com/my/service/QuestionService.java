@@ -96,4 +96,13 @@ public class QuestionService {
     }
 
 
+    public QuestionDTO getById(Integer id) {
+        Question question = questionMapper.findById(id);
+        QuestionDTO questionDTO = new QuestionDTO();
+        String creator = question.getCreator();
+        User user = userMapper.findByAccountId(creator);
+        BeanUtils.copyProperties(question, questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
 }

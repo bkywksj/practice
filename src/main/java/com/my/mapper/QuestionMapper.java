@@ -1,9 +1,10 @@
 package com.my.mapper;
 
 
+import com.my.dto.QuestionDTO;
 import com.my.entity.Question;
 import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
+
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -27,4 +28,7 @@ public interface QuestionMapper {
 
     @Select("select count(1) from question where creator=#{accountId}")
     Integer countById(String accountId);
+
+    @Select("select * from question where id=#{id}")
+    Question findById(Integer id);
 }

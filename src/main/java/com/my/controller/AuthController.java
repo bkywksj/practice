@@ -6,11 +6,13 @@ import com.my.entity.User;
 import com.my.mapper.UserMapper;
 
 import com.my.provider.GithubProvider;
+import com.my.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +37,10 @@ public class AuthController {
     @Value("${github.redirect_url}")
     private String redirect_uri;
 
+
+
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
 
     @GetMapping("/callback")
@@ -58,6 +62,7 @@ public class AuthController {
         System.out.println("githubUser:"+githubUser);
 
         if (githubUser != null) {
+
             User user = new User();
             String uuid = UUID.randomUUID().toString();
             user.setToken(uuid);
@@ -67,15 +72,26 @@ public class AuthController {
             user.setAccountId(githubUser.getId());
             user.setGmtCreat(new Date());
             user.setGmtModified(new Date());
-            userMapper.insert(user);
-            response.addCookie(new Cookie("token", uuid));
 
+            userService.creatOrUpdate(user);
+
+            response.addCookie(new Cookie("token", uuid));
 
             request.getSession().setAttribute("user", githubUser);
             //登录成功后,创建的uuid相当于session,存入数据库,下次直接调用就不用再次登录
         }
         return "redirect:/";
 
+    }
+
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response) {
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 
 }
