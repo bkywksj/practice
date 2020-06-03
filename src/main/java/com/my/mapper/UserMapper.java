@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-    @Insert("insert into user(name,account_id,bio,token,gmt_creat,gmt_modified,avatar_url) values (#{name},#{accountId},#{bio},#{token},#{gmtCreat},#{gmtModified},#{avatarUrl})")
+    @Insert("insert into user(name,account_id,bio,token,avatar_url) values (#{name},#{accountId},#{bio},#{token},#{avatarUrl})")
     int insert(User user);
 
     @Select("select * from user where token = #{token}")
@@ -24,6 +24,6 @@ public interface UserMapper {
     @Select("select * from user where account_id = #{creator} limit 1")
     User findByAccountId(String creator);
 
-    @Update("update user set name=#{name},bio=#{bio},token=#{token},gmt_modified=#{gmtModified},avatar_url=#{avatarUrl} where account_id=#{accountId}")
+    @Update("update user set name=#{name},bio=#{bio},token=#{token},avatar_url=#{avatarUrl} where account_id=#{accountId}")
     void update(User user);
 }

@@ -1,5 +1,7 @@
 package com.my.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,10 +19,13 @@ public class User {
     private String accountId;
     private String bio;
     private String token;
-    @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
-    private Date gmtCreat;
-    @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
+
+    @TableField(fill = FieldFill.INSERT)
+    private Date gmtCreate;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date gmtModified;
+
     private String avatarUrl;
 
 }

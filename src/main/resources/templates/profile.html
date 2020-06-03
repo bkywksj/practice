@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${sectionName}"></title>
+    <div th:replace="~{common/include.html :: include} "></div>
+
 </head>
 <body style="background-color: #eeeeee" >
 <div th:replace="~{common/include.html :: navgation} "></div>
@@ -23,7 +25,7 @@
                     <span th:text="${question.description}"></span><br>●
                     <span th:text="${question.commentCount}"></span><span style="color: #aaaaaa">个回复 </span>●
                     <span th:text="${question.viewCount}"></span><span style="color: #aaaaaa">次浏览 </span>●
-                    <span style="color: #aaaaaa" th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd HH:mm:ss')}"></span>
+                    <span style="color: #aaaaaa" th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm:ss')}"></span>
                 </div>
             </div>
 
@@ -76,6 +78,5 @@
 </div>
 
 
-<div th:replace="~{common/include.html :: include} "></div>
 </body>
 </html>

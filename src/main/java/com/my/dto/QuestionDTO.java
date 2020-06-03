@@ -18,7 +18,7 @@ public class QuestionDTO {
     private String description;
     private String tag;
     @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
-    private Date gmtCreat;
+    private Date gmtCreate;
     @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
     private Date gmtModified;
     private String creator;

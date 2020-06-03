@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>问码子</title>
+    <div th:fragment="include">
+        <link rel="stylesheet" th:href="@{~/css/my.css}">
+        <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{~/css/bootstrap-theme.min.css}">
+        <script th:src="@{~/js/jquery.min.js}"></script>
+        <script th:src="@{~/js/bootstrap.min.js}"></script>
+        <script th:src="@{~/js/jquery.validate.min.js}"></script>
+    </div>
 </head>
 <body style="background-color: #eeeeee">
 <div th:fragment="navgation">
@@ -44,13 +52,6 @@
 </div>
 
 
-<div th:fragment="include">
-    <link rel="stylesheet" th:href="@{~/css/my.css}">
-    <link rel="stylesheet" th:href="@{~/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{~/css/bootstrap-theme.min.css}">
-    <script th:src="@{~/js/jquery.min.js}"></script>
-    <script th:src="@{~/js/bootstrap.min.js}"></script>
-    <script th:src="@{~/js/jquery.validate.min.js}"></script>
-</div>
+
 </body>
 </html>

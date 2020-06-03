@@ -70,8 +70,8 @@ public class AuthController {
             user.setBio(githubUser.getBio());
             user.setAvatarUrl(githubUser.getAvatarUrl());
             user.setAccountId(githubUser.getId());
-            user.setGmtCreat(new Date());
-            user.setGmtModified(new Date());
+//            user.setGmtCreate(new Date());
+//            user.setGmtModified(new Date());
 
             userService.creatOrUpdate(user);
 

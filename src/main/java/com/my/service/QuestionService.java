@@ -27,6 +27,7 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
+
     public PageDTO list(Integer page,  Integer size) {
 
         PageDTO pageDTO = new PageDTO();
@@ -104,5 +105,19 @@ public class QuestionService {
         BeanUtils.copyProperties(question, questionDTO);
         questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    public void creatOrUpdate(Question question) {
+        if (question.getId() == null) {
+            questionMapper.creat(question);
+        } else {
+            //更新
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.update(question);
+        }
+    }
+
+    public void incView(Integer id) {
+        questionMapper.updateView(id);
     }
 }

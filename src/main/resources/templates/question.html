@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${question.title}"></title>
+    <div th:replace="~{common/include.html :: include} "></div>
+
 </head>
 <body style="background-color: #eeeeee">
 <div th:replace="~{common/include.html :: navgation} "></div>
@@ -17,7 +19,7 @@
                 <span th:text="${question.user.name}"></span>
 
                 <span>●发布于</span>
-                <span th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd HH:mm:ss')}"></span>
+                <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm:ss')}"></span>
 
                 <span>●阅读数:</span>
                 <span th:text="${question.viewCount}"></span>
@@ -62,7 +64,7 @@
                             <br> ●
                             <span th:text="${question.viewCount}"></span>次浏览
                             <br> ●
-                            <span th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd HH:mm:ss')}"></span>
+                            <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm:ss')}"></span>
                     </span>
 
                     </div>
@@ -78,6 +80,5 @@
 </div>
 
 
-<div th:replace="~{common/include.html :: include} "></div>
 </body>
 </html>

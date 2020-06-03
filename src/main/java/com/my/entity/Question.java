@@ -1,5 +1,7 @@
 package com.my.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,10 +18,15 @@ public class Question {
     private String title;
     private String description;
     private String tag;
-    @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
-    private Date gmtCreat;
-    @DateTimeFormat(pattern = "yyyy:MM:dd HH:mm:ss")
+
+    @TableField(fill = FieldFill.INSERT)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date gmtCreate;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gmtModified;
+
     private String creator;
     private Integer viewCount;
     private Integer commentCount;

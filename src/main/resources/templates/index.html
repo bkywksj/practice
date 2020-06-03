@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>问码子</title>
+    <div th:replace="~{common/include.html :: include}"></div>
 </head>
 <body style="background-color: #eeeeee">
 <div th:replace="~{common/include.html :: navgation} "></div>
@@ -30,7 +31,7 @@
                             <span th:text="${question.commentCount}"></span>
                             个回复 ●
                             <span th:text="${question.viewCount}"></span>次浏览 ●
-                            <span th:text="${#dates.format(question.gmtCreat,'yyyy-MM-dd HH:mm:ss')}"></span>
+                            <span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm:ss')}"></span>
                     </span>
 
                 </div>
@@ -77,6 +78,6 @@
 </div>
 
 
-<div th:replace="~{common/include.html :: include}"></div>
+
 </body>
 </html>
